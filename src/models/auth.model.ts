@@ -6,6 +6,8 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role: string;
+  isDeleted: boolean;
+  isBlocked: boolean;
 }
 
 const UserSchema: Schema = new Schema(
@@ -32,6 +34,14 @@ const UserSchema: Schema = new Schema(
       type: String,
       required: true,
       enum: ["ADMIN", "EMPLOYER", "JOB_SEEKER", "MODERATOR", "GUEST"],
+    },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
     passwordChangedAt: Date,
     passwordResetToken: String,

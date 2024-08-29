@@ -1,13 +1,20 @@
 import express from "express";
-import router from "./routes/auth.route";
 import dotenv from "dotenv";
-import connectDB from "./config/db";
 
+import bodyParser from "body-parser";
+
+import connectDB from "./config/db";
+import router from "./routes/auth.route";
 dotenv.config();
 connectDB();
 const port = process.env.PORT;
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/", router);
 
