@@ -8,6 +8,9 @@ export interface IUser extends Document {
   role: string;
   isDeleted: boolean;
   isBlocked: boolean;
+  passwordChangedAt?: Date;
+  passwordResetToken?: string;
+  passwordResetExpires?: Date;
 }
 
 const UserSchema: Schema = new Schema(
