@@ -8,6 +8,22 @@ export const register = async (req: Request, res: Response) => {
   try {
     const { userId, name, email, password, role } = req.body;
 
+    const checkuserId = await User.findOne({ userId });
+    if (checkuserId) {
+      return res.status(404).json({
+        status: "fail",
+        message: "This userId is already exist! Please choose different.",
+      });
+    }
+
+    const checkEmail = await User.findOne({ email });
+    if (checkEmail) {
+      return res.status(404).json({
+        status: "fail",
+        message: "This email is already exist! Please choose different.",
+      });
+    }
+
     // Validate input
     if (!userId || !email || !password || !name || !role) {
       return res.status(400).json({

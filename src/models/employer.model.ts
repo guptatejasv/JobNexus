@@ -1,0 +1,49 @@
+import mongoose, { Schema, Document, model } from "mongoose";
+
+export interface IEMPLOYER extends Document {
+  userId: string;
+  companyName: string;
+  companyLogoUrl: string;
+  companyDescription: string;
+  location: string;
+  industry: string;
+  jobListings: string;
+}
+
+const EmployerSchema: Schema = new Schema(
+  {
+    userId: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    companyName: {
+      type: String,
+      required: true,
+    },
+    companyLogoUrl: {
+      type: String,
+      required: true,
+    },
+    companyDescription: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    industry: {
+      type: String,
+      default: false,
+    },
+    jobListings: [
+      { type: mongoose.Schema.ObjectId, ref: "JobListings", required: true },
+    ],
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
+export const Employer = model<IEMPLOYER>("Employer", EmployerSchema);
