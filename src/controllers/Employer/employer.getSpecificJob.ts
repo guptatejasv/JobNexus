@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Employer } from "../../models/employer.model";
 import { JobListing } from "../../models/jobListings.model";
 import { User } from "../../models/auth.model";
+import { JobSeeker } from "../../models/jobseeker.model";
 export const getSpecificJob = async (req: Request, res: Response) => {
   try {
     const userId = req.user.id;
@@ -22,8 +23,9 @@ export const getSpecificJob = async (req: Request, res: Response) => {
       });
     }
 
-    const job = await JobListing.findById(jobId);
-
+    const job = await JobListing.findById(jobId)
+      .populate({ path: "applicants", model: JobSeeker })
+      .exec();
     res.status(200).json({
       status: "success",
       job,
@@ -31,7 +33,7 @@ export const getSpecificJob = async (req: Request, res: Response) => {
   } catch (err) {
     res.status(400).json({
       status: "fail",
-      message: err || "An error occurred while getting Profile.",
+      message: err,
     });
   }
 };
