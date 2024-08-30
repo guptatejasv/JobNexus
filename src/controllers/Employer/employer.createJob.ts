@@ -13,6 +13,8 @@ export const createJob = async (req: Request, res: Response) => {
       location,
       salaryRange,
       applicants,
+      startDate,
+      endDate,
     } = req.body;
 
     const user = await User.findById(userId);
@@ -41,6 +43,8 @@ export const createJob = async (req: Request, res: Response) => {
       location,
       salaryRange,
       applicants,
+      startDate,
+      endDate,
     });
 
     const JobList = await Employer.findOne({ userId });

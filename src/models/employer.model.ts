@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, model, ObjectId } from "mongoose";
 
 export interface IEMPLOYER extends Document {
-  userId: string;
+  userId: ObjectId;
   companyName: string;
   companyLogoUrl: string;
   companyDescription: string;
@@ -13,7 +13,7 @@ export interface IEMPLOYER extends Document {
 const EmployerSchema: Schema = new Schema(
   {
     userId: {
-      type: String,
+      type: mongoose.Schema.ObjectId,
       required: true,
       unique: true,
     },

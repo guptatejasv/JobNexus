@@ -8,6 +8,8 @@ export interface IJOBLISTING extends Document {
   location: string;
   salaryRange: string;
   applicants: [ObjectId];
+  startDate: Date;
+  endDate: Date;
 }
 
 const JobListingSchema: Schema = new Schema(
@@ -31,6 +33,14 @@ const JobListingSchema: Schema = new Schema(
     },
     salaryRange: {
       type: String,
+      required: true,
+    },
+    startDate: {
+      type: Date,
+      required: true,
+    },
+    endDate: {
+      type: Date,
       required: true,
     },
     applicants: [
