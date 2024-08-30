@@ -3,7 +3,10 @@ import { createEmployerProfile } from "../controllers/Employer/employer.createPr
 import { verify_token } from "../helper/jwtVerify";
 import { getEmployerProfile } from "../controllers/Employer/employer.getProfile";
 import { updateEmployerProfile } from "../controllers/Employer/employer.updateProfile";
-import { createJobListings } from "../controllers/Employer/employer.createJobListings";
+import { createJob } from "../controllers/Employer/employer.createJob";
+import { getAllJobListings } from "../controllers/Employer/employer.getAllJobListings";
+import { getSpecificJob } from "../controllers/Employer/employer.getSpecificJob";
+import { updateJobListings } from "../controllers/Employer/employer.updateJobListing";
 
 const EmployerRouter = Router();
 
@@ -18,5 +21,9 @@ EmployerRouter.patch(
   verify_token,
   updateEmployerProfile
 );
-EmployerRouter.post("/createJobListings", verify_token, createJobListings);
+EmployerRouter.post("/job-listings", verify_token, createJob);
+EmployerRouter.get("/job-listings", verify_token, getAllJobListings);
+EmployerRouter.get("/job-listings/:jobId", verify_token, getSpecificJob);
+EmployerRouter.patch("/job-listings/:jobId", verify_token, updateJobListings);
+
 export default EmployerRouter;

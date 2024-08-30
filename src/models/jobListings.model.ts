@@ -15,8 +15,7 @@ const JobListingSchema: Schema = new Schema(
     employerId: {
       type: mongoose.Schema.ObjectId,
       required: true,
-      ref: "User",
-      unique: true,
+      ref: "Employer",
     },
     title: {
       type: String,

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, model } from "mongoose";
+import mongoose, { Schema, Document, model, ObjectId } from "mongoose";
 
 export interface IEMPLOYER extends Document {
   userId: string;
@@ -7,7 +7,7 @@ export interface IEMPLOYER extends Document {
   companyDescription: string;
   location: string;
   industry: string;
-  jobListings: string;
+  jobListings: [ObjectId];
 }
 
 const EmployerSchema: Schema = new Schema(
