@@ -3,7 +3,10 @@ import { Schema, Document, model } from "mongoose";
 export interface IUNIVERSITY extends Document {
   userId: string;
   universityName: string;
-  univertisyLogoUrl: string;
+  collegeName?: string;
+  collegeLogoUrl?: string;
+  collegeDescription?: string;
+  universityLogoUrl: string;
   universityDescription: string;
   location: string;
 }
@@ -19,7 +22,7 @@ const UniversitySchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    univertisyLogoUrl: {
+    universityLogoUrl: {
       type: String,
       required: true,
     },
@@ -31,9 +34,14 @@ const UniversitySchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    industry: {
+    collegeName: {
       type: String,
-      default: false,
+    },
+    collegeLogoUrl: {
+      type: String,
+    },
+    collegeDescription: {
+      type: String,
     },
   },
   {
