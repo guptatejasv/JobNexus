@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { JobListing } from "../../models/jobListings.model";
 import { User } from "../../models/auth.model";
 
-export const createJob = async (req: Request, res: Response) => {
+export const removeJob = async (req: Request, res: Response) => {
   try {
     const userId = req.user.id;
     const jobId = req.params.jobId;

@@ -8,6 +8,7 @@ import { getAllJobListings } from "../controllers/Employer/employer.getAllJobLis
 import { getSpecificJob } from "../controllers/Employer/employer.getSpecificJob";
 import { updateJobListings } from "../controllers/Employer/employer.updateJobListing";
 import { getJobSeeker } from "../controllers/Employer/employer.getJobSeeker";
+import { removeJob } from "../controllers/Employer/employer.removeJob";
 
 const EmployerRouter = Router();
 
@@ -27,5 +28,6 @@ EmployerRouter.get("/job-listings", verify_token, getAllJobListings);
 EmployerRouter.get("/job-listings/:jobId", verify_token, getSpecificJob);
 EmployerRouter.patch("/job-listings/:jobId", verify_token, updateJobListings);
 EmployerRouter.get("/jobSeeker/:id", verify_token, getJobSeeker);
+EmployerRouter.delete("/job-listings/:jobId", verify_token, removeJob);
 
 export default EmployerRouter;
