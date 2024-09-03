@@ -3,68 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JobNexus Signup</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Fetch API Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      }
+      .loader {
+        display: none;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-    <div class="signup-container">
-      <div class="signup-header">
-        <h2>Create Your Account</h2>
-      </div>
-      <form id="signupForm">
-        <div class="form-group">
-          <label for="userId">User ID</label>
-          <input
-            type="text"
-            id="userId"
-            name="userId"
-            placeholder="Enter your user ID"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter your name"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="role">Role</label>
-          <select id="role" name="role" required>
-            <option value="ADMIN">ADMIN</option>
-            <option value="USER">USER</option>
-            <option value="GUEST">GUEST</option>
-          </select>
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-      <div id="result"></div>
-    </div>
+    <h1>Fetch API Example</h1>
+    <button id="fetchDataBtn">Fetch Data</button>
+    <div id="loader" class="loader">Loading...</div>
+    <div id="result"></div>
 
-    <script src="script.js"></script>
+    <script>
+      document
+        .getElementById("fetchDataBtn")
+        .addEventListener("click", async function () {
+          const resultDiv = document.getElementById("result");
+          const loader = document.getElementById("loader");
+
+          // Show the loader
+          loader.style.display = "block";
+          resultDiv.innerHTML = "";
+
+          try {
+            // Fetch data from the API
+            const response = await fetch(
+              "http://127.0.0.1:5000/api/v1/user/job-listings"
+            );
+
+            const data = await response.json();
+            console.log(data);
+            resultDiv.innerHTML += `<p><strong>${item.title}</strong><br>${item.body}</p>`;
+          } catch (error) {
+            resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+          } finally {
+            // Hide the loader
+            loader.style.display = "none";
+          }
+        });
+    </script>
   </body>
 </html>
